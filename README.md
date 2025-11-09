@@ -23,24 +23,19 @@
 ## 🧱 Architecture
 
 
-Client Services (Applications)
-│ POST /logs
-▼
-┌──────────────────────────────┐
-│ Spring Boot API │
-└──────────────────────────────┘
-│ │
-▼ ▼
-MongoDB Redis Stream ← Rate limiting
-│ │
-▼ ▼
-Background Indexer
-│
-▼
-Elasticsearch
-│
-▼
-Dashboard / API UI
+```mermaid
+flowchart TD
+
+    A[Client Services / Applications] -->|POST /logs| B[Spring Boot API]
+
+    B --> C[(MongoDB)]
+    B --> D[(Redis Stream)]
+    D -->|Rate Limiting / Buffer| E[Background Indexer]
+
+    E --> F[(Elasticsearch)]
+
+    F --> G[Dashboard / API UI]
+
 
 
 ---
