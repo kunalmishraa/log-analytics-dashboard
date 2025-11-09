@@ -23,32 +23,8 @@
 ## 🧱 Architecture
 
 
+![ARCHITECTURE EXPLAINATION](image.png)
 
-```mermaid
-flowchart TD
-
-    %% STYLE DEFINITIONS
-    classDef service fill:#4f46e5,stroke:#1e1b4b,color:#ffffff,stroke-width:1px;
-    classDef db fill:#0ea5e9,stroke:#0c4a6e,color:#ffffff,stroke-width:1px;
-    classDef cache fill:#f59e0b,stroke:#92400e,color:#ffffff,stroke-width:1px;
-    classDef analytics fill:#22c55e,stroke:#14532d,color:#ffffff,stroke-width:1px;
-    classDef ui fill:#9333ea,stroke:#3b0764,color:#ffffff,stroke-width:1px;
-
-    A[Client Services / Applications] -->|POST /logs| B[Spring Boot Ingest API]
-
-    B --> C[(MongoDB - Raw Log Storage)]
-    B --> D[(Redis Stream - Buffer & Rate Limit)]
-
-    D --> E[Background Indexer]
-    E --> F[(Elasticsearch - Search Index)]
-
-    F --> G[Real-Time Dashboard / API UI]
-
-    %% Apply styles
-    class B,E service
-    class C,F db
-    class D cache
-    class G ui
 
 
 
@@ -86,8 +62,10 @@ Spring Boot Starter Test (default)
 
 
 
-Additionally added manually:
 
+## Additionally added manually:
+
+```text
 springdoc-openapi-starter-webmvc-ui
 
 micrometer-registry-prometheus (optional)
@@ -96,7 +74,7 @@ Testcontainers (optional for integration tests)
 
 
 
-🧪 API Endpoints (Preview)
+##🧪 API Endpoints (Preview)
 Method	Endpoint	Description
 POST	/api/logs	Ingest single or batch logs
 GET	/api/search/logs	Search logs by filters & keywords
@@ -107,7 +85,7 @@ GET	/swagger-ui.html	API documentation
 
 
 
-🐳 Local Development with Docker
+##🐳 Local Development with Docker
 docker compose up -d
 
 
