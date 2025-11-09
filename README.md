@@ -23,7 +23,13 @@
 ## 🧱 Architecture
 
 
-```mermaid
+
+---
+
+### ✅ **HTML Version (for standalone page or Notion/Docs)**
+
+```html
+<div class="mermaid">
 flowchart TD
 
     A[Client Services / Applications] -->|POST /logs| B[Spring Boot API]
@@ -35,6 +41,11 @@ flowchart TD
     E --> F[(Elasticsearch)]
 
     F --> G[Dashboard / API UI]
+</div>
+
+<script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true });</script>
+
 
 
 
