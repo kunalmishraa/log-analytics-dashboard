@@ -24,27 +24,31 @@
 
 
 
----
-
-### ✅ **HTML Version (for standalone page or Notion/Docs)**
-
-```html
-<div class="mermaid">
+```mermaid
 flowchart TD
 
-    A[Client Services / Applications] -->|POST /logs| B[Spring Boot API]
+    %% STYLE DEFINITIONS
+    classDef service fill:#4f46e5,stroke:#1e1b4b,color:#ffffff,stroke-width:1px;
+    classDef db fill:#0ea5e9,stroke:#0c4a6e,color:#ffffff,stroke-width:1px;
+    classDef cache fill:#f59e0b,stroke:#92400e,color:#ffffff,stroke-width:1px;
+    classDef analytics fill:#22c55e,stroke:#14532d,color:#ffffff,stroke-width:1px;
+    classDef ui fill:#9333ea,stroke:#3b0764,color:#ffffff,stroke-width:1px;
 
-    B --> C[(MongoDB)]
-    B --> D[(Redis Stream)]
-    D -->|Rate Limiting / Buffer| E[Background Indexer]
+    A[Client Services / Applications] -->|POST /logs| B[Spring Boot Ingest API]
 
-    E --> F[(Elasticsearch)]
+    B --> C[(MongoDB - Raw Log Storage)]
+    B --> D[(Redis Stream - Buffer & Rate Limit)]
 
-    F --> G[Dashboard / API UI]
-</div>
+    D --> E[Background Indexer]
+    E --> F[(Elasticsearch - Search Index)]
 
-<script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({ startOnLoad: true });</script>
+    F --> G[Real-Time Dashboard / API UI]
+
+    %% Apply styles
+    class B,E service
+    class C,F db
+    class D cache
+    class G ui
 
 
 
